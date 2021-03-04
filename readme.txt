@@ -4,3 +4,7 @@
 2.Run test.py to get the word cloud and active time graph
 
 3.Run  unetworkchart.py to get the user connection graph
+
+4.To see the interactive user activity bar chart
+Localhost:8000
+--- Usage: python -m http.server ---

@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Mar  1 16:32:04 2021
-
-@author: huangchengmin
-"""
 
 import re
 import numpy as np
@@ -19,6 +14,9 @@ pattern2=re.compile(r'(\d+):(\d+):\d+')#匹配 15:55:40
 #pattern3=re.compile(r'(\()(.*?)(\))')#匹配    2班某某(1315426911)相关内容
 f = open('chatlog.txt', 'r', encoding='utf-8')  # 要进行分词处理的文本文件 (统统按照utf8文件去处理，省得麻烦)
 lines = f.readlines()
+f2 = open('file.txt', 'r', encoding='utf-8')
+flines = f2.readlines()
+
 index=0
 def getpicture(y):#matplotlib绘图
     x=[]
@@ -82,6 +80,33 @@ def analysebyhour(lines):
     for i in range(0,24):
         print('time:',i,'time',value[i]['time'])
         y.append(value[i]['time'])
-    getpicture(y)
     getciyun(value)
+
+def analysebyhour2(lines):
+    value=[]
+    y=[]
+    index=0
+    for i in range(0,24):
+        value.append({})
+        value[i]['time']=0
+        value[i]['text']=''
+    for line in lines:
+        if line != "\n" and line.strip() != "\n" and line != None and not line.__contains__("撤回了"):
+           line = line.replace("[表情]", " ").replace("@全体成员", " ").replace("[表情]", " ").\
+                replace("[QQ红包]我发了一个“专享红包”，请使用新版手机QQ查收红。", "").replace("\n", " ").replace("[图片]",'')
+           if(pattern.search(line)):#匹配到正确的对象
+                date=pattern.search(line)
+                hour=pattern2.search(line).group(1)
+                #print(date.group(0),hour)
+                value[int(hour)]['time']+=1
+                index=hour
+           else:
+               print(line)
+               value[int(index)]['text']+=str(line)
+    for i in range(0,24):
+        print('time:',i,'time',value[i]['time'])
+        y.append(value[i]['time'])
+    getpicture(y)
+
 analysebyhour(lines)
+analysebyhour2(flines)

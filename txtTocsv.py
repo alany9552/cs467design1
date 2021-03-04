@@ -23,7 +23,8 @@ except IOError:
 # df = pd.read_csv("dataquery.txt",delimiter="\n")
 #
 # df.to_csv("test3.csv", encoding='utf-8', index=False)
-originalF = open('file.txt', 'r', encoding='utf-8')
+with open('file_path', 'r', encoding='utf-8') as chatlog_file:
+    chatlog_list = [line.strip() for line in chatlog_file if line.strip() != ""]
 ss = originalF.readline()
 
 print(ss)

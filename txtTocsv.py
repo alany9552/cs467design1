@@ -23,3 +23,7 @@ except IOError:
 # df = pd.read_csv("dataquery.txt",delimiter="\n")
 #
 # df.to_csv("test3.csv", encoding='utf-8', index=False)
+originalF = open('file.txt', 'r', encoding='utf-8')
+ss = originalF.readline()
+
+print(ss)

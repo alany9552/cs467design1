@@ -12,7 +12,7 @@ pattern=re.compile(r'(\d*)-(\d*)-(\d*) .* .*')
 #匹配   2018-05-05 15:55:40 2班某某(1315426911) 有一个坑点就是2018-05-07 13:48:39 2XXX<xxxx@qq.com>这种格式
 pattern2=re.compile(r'(\d+):(\d+):\d+')#匹配 15:55:40
 #pattern3=re.compile(r'(\()(.*?)(\))')#匹配    2班某某(1315426911)相关内容
-f = open('chatlog.txt', 'r', encoding='utf-8')  # 要进行分词处理的文本文件 (统统按照utf8文件去处理，省得麻烦)
+f = open('chatlog.txt', 'r', encoding='utf-8')
 lines = f.readlines()
 f2 = open('file.txt', 'r', encoding='utf-8')
 flines = f2.readlines()
@@ -28,12 +28,10 @@ def getpicture(y):#matplotlib绘图
     plt.figure(figsize=(8, 6))  ##指定图像比例： 8：6
     plt.subplots_adjust(bottom=0.2)
     plt.scatter(Xi, Yi, color="red", label="times")
-    plt.xlabel("时间00：00—24：00")
-    plt.ylabel("发言次数/次")
+    plt.xlabel("GMT-6 Times 00：00—24：00")
+    plt.ylabel("Talk/Times")
     plt.xticks(range(0,24),rotation=75,fontsize=10)#设置横坐标显示24次。
     plt.yticks(range(0,1000,50))
-   # plt.legend(loc='lower right')  # 绘制图例
-   # plt.show()
     plt.savefig("img/hour.png",format='png')
     plt.close()
 def getciyun(value):
@@ -49,7 +47,6 @@ def getciyun(value):
                   # max_font_size=300,  # 设置字体最大值
                    random_state=40,  # 设置有多少种随机生成状态，即有多少种配色方案
                    )  # 字体这里有个坑，一定要设这个参数。否则会显示一堆小方框wc.font_path="simhei.ttf"   # 黑体
-    # wc.font_path="simhei.ttf"
     my_wordcloud = wc.generate(text)
 
     plt.imshow(my_wordcloud)
